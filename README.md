@@ -54,7 +54,7 @@ export default defineVitestConfig({
           // },
         },
       },
-      // Browser tests - real browsers e.g. via Playwright
+      // Browser tests 
       {
         test: {
           name: 'browser',
@@ -80,18 +80,19 @@ export default defineVitestConfig({
 ```typescript
 // vitest-setup.ts
 
-// Load Stencil components, adjusting according to your build output of choice*
-// (*Bear in mind, you may need `buildDist: true` (in your stencil.config)
-// or `--prod` to use an output other than the browser lazy-loader)
+// Load Stencil components. 
+// Adjust according to your build output of choice *
 await import('./dist/test-components/test-components.esm.js');
 
 export {};
+// * Bear in mind, you may need `buildDist: true` (in your stencil.config)
+// or `--prod` to use an output other than the browser lazy-loader
 ```
 
 ### 4. Write Tests
 
 ```tsx
-// my-button.spec.tsx
+// src/components/my-button/my-button.spec.tsx
 
 import { describe, it, expect } from 'vitest';
 import { render, h } from '@stenciljs/vitest';
