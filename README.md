@@ -2,7 +2,9 @@
 
 First-class testing utilities for Stencil components, powered by Vitest.
 
-## Installation
+## Quick Start
+
+### 1. Install
 
 ```bash
 npm i --save-dev @stenciljs/vitest vitest
@@ -11,25 +13,16 @@ npm i --save-dev @stenciljs/vitest vitest
 For browser testing, also install:
 
 ```bash
-npm i -D @vitest/browser-preview
-```
-
-or
-
-```bash
+npm i -D @vitest/browser-playwright
+# or
 npm i -D @vitest/browser-webdriverio
 ```
 
-## Quick Start
-
-### 1. Create `vitest.config.ts`
-
-Use `defineVitestConfig` to create your Vitest configuration with Stencil enhancements:
+### 2. Create `vitest.config.ts`
 
 ```typescript
 import { defineVitestConfig } from '@stenciljs/vitest/config';
 import { playwright } from '@vitest/browser-playwright';
-// or import { wdio } from '@vitest/browser-webdriverio';
 
 export default defineVitestConfig({
   stencilConfig: './stencil.config.ts',
@@ -43,7 +36,6 @@ export default defineVitestConfig({
           environment: 'node',
         },
       },
-
       // Spec tests - via a node DOM of your choice
       {
         test: {
@@ -51,6 +43,9 @@ export default defineVitestConfig({
           include: ['src/**/*.spec.{ts,tsx}'],
           environment: 'stencil',
           setupFiles: ['./vitest-setup.ts'],
+          
+          // Optional environment options
+
           // environmentOptions: {
           //   stencil: {
           //     domEnvironment: 'happy-dom' | 'jsdom' | 'mock-doc' (default)
@@ -59,7 +54,6 @@ export default defineVitestConfig({
           // },
         },
       },
-
       // Browser tests - real browsers e.g. via Playwright
       {
         test: {
@@ -81,11 +75,11 @@ export default defineVitestConfig({
 
 [refer Vitest documentation for all configuration options](https://vitest.dev/config/)
 
-### 2. Load your components via `vitest-setup.ts`
-
-Load your components:
+### 3. Load your components 
 
 ```typescript
+// vitest-setup.ts
+
 // Load Stencil components, adjusting according to your build output of choice*
 // (*Bear in mind, you may need `buildDist: true` (in your stencil.config)
 // or `--prod` to use an output other than the browser lazy-loader)
@@ -94,23 +88,29 @@ await import('./dist/test-components/test-components.esm.js');
 export {};
 ```
 
-### 3. Write Tests
+### 4. Write Tests
 
-```typescript
+```tsx
+// my-button.spec.tsx
+
 import { describe, it, expect } from 'vitest';
 import { render, h } from '@stenciljs/vitest';
 
 describe('my-button', () => {
   it('renders with text', async () => {
-    const { root } = await render(<my-button label="Click me" />);
-    expect(root).toHaveTextContent('Click me');
-  });
-
-  it('responds to clicks', async () => {
-    const { root } = await render(<my-button label="Click" />);
+    const { root, waitForChanges } = await render(<my-button label="Click me" />);
     root.click();
-    await root.waitForChanges();
-    expect(root).toHaveClass('clicked');
+    await waitForChanges();
+    expect(root).toEqualHtml(`
+      <my-button class="hydrated">
+        <mock:shadow-root>
+          <button class="button button--secondary button--small" type="button">
+            <slot></slot>
+          </button>
+        </mock:shadow-root>
+        Small
+      </my-button>
+    `);;
   });
 });
 ```
@@ -119,6 +119,7 @@ describe('my-button', () => {
 
 ```json
 // package.json
+
 {
   "scripts": {
     "test": "stencil-test",
@@ -174,7 +175,7 @@ expect(element).toEqualLightHtml('<div>Light DOM only</div>');
 
 Test custom events emitted by your components:
 
-```typescript
+```tsx
 const { root } = await render(<my-button />);
 
 // Spy on events
@@ -200,7 +201,7 @@ expect(clickSpy.lastEvent?.detail).toEqual({ buttonId: 'my-button' });
 
 The package includes a custom snapshot serializer for Stencil components that properly handles shadow DOM:
 
-```typescript
+```tsx
 import { render, h } from '@stenciljs/vitest';
 ...
 const { root } = await render(<my-component />);
