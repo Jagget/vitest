@@ -1,0 +1,25 @@
+{
+  "name": "test-project",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Test fixture for @stenciljs/vitest",
+  "scripts": {
+    "build": "stencil build --prod",
+    "start": "stencil build --watch --serve",
+    "test": "stencil-test"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.0.0"
+  },
+  "devDependencies": {
+    "@stenciljs/vitest": "workspace:*",
+    "@vitest/browser": "^4.0.0",
+    "@vitest/browser-playwright": "^4.0.16",
+    "happy-dom": "^20.0.11",
+    "jsdom": "^27.3.0",
+    "playwright": "^1.57.0",
+    "vitest": "^4.0.0",
+    "vitest-environment-stencil": "workspace:*"
+  }
+}
