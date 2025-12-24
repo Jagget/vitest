@@ -45,6 +45,24 @@ export default defineVitestConfig({
             provider: playwright(),
             headless: true,
             instances: [{ browser: 'chromium' }],
+            expect: {
+              toMatchScreenshot: {
+                comparatorName: 'pixelmatch',
+                comparatorOptions: {
+                  threshold: 0.5,
+                  allowedMismatchedPixels: 100,
+                },
+                resolveScreenshotPath: ({
+                  arg,
+                  browserName,
+                  ext,
+                  testFileName,
+                  screenshotDirectory,
+                  testFileDirectory,
+                  root,
+                }) => `${root}/${testFileDirectory}/${screenshotDirectory}/${testFileName}/${arg}-${browserName}${ext}`,
+              },
+            },
           },
         },
       },
