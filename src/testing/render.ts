@@ -45,7 +45,7 @@ export async function render<T extends HTMLElement = HTMLElement>(
     await (element as any).componentOnReady();
   }
 
-  function waitForChanges(documentElement = document.documentElement) {
+  function waitForChanges(documentElement = element) {
     return new Promise<void>((resolve) => {
       // Wait for Stencil's RAF-based update cycle
       // Use multiple RAF cycles to ensure all batched updates complete
@@ -84,7 +84,7 @@ export async function render<T extends HTMLElement = HTMLElement>(
 
     // Wait for multiple RAF cycles to ensure Stencil's batched updates complete
     // Stencil batches updates using requestAnimationFrame for performance
-    await waitForChanges(container);
+    await waitForChanges();
 
     // Additional RAF cycle to ensure rendering is complete
     await new Promise((resolve) => requestAnimationFrame(() => resolve(undefined)));

@@ -141,7 +141,8 @@ Render a component for testing.
 
 ```tsx
 import { render, h } from '@stenciljs/vitest';
-const { root, waitForChanges } = await render(<my-component name="World" />);
+
+const { root, waitForChanges, setProps } = await render(<my-component name="World" />);
 
 // Access the element
 expect(root.textContent).toContain('World');
@@ -149,6 +150,8 @@ expect(root.textContent).toContain('World');
 // Update props
 root.name = 'Stencil';
 await waitForChanges();
+// or
+await setProps({ name: 'Stencil' });
 ```
 
 ### Available matchers:
@@ -177,15 +180,15 @@ expect(element).toEqualLightHtml('<div>Light DOM only</div>');
 Test custom events emitted by your components:
 
 ```tsx
-const { root } = await render(<my-button />);
+const { root, spyOnEvent, waitForChanges } = await render(<my-button />);
 
 // Spy on events
-const clickSpy = root.spyOnEvent('buttonClick');
-const changeSpy = root.spyOnEvent('valueChange');
+const clickSpy = spyOnEvent('buttonClick');
+const changeSpy = spyOnEvent('valueChange');
 
 // Trigger events
 root.click();
-await root.waitForChanges();
+await waitForChanges();
 
 // Assert events were emitted
 expect(clickSpy).toHaveReceivedEvent();
