@@ -60,6 +60,7 @@
     "build": "tsc && tsc -p tsconfig.bin.json",
     "dev": "tsc --watch",
     "test": "pnpm --filter test-project test",
+    "test:engines": "pnpm installed-check --no-workspaces --ignore-dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
@@ -72,10 +73,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
-  },
-  "packageManager": "pnpm@10.26.0",
   "peerDependencies": {
     "@stencil/core": "^4.0.0",
     "vitest": "^4.0.0 || ^3.0.0 || ^2.0.0"
@@ -111,15 +108,20 @@
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@stencil/core": "^4.0.0",
-    "@types-node": "^20.19.27",
+    "@types/node": "24.10.4",
     "@typescript-eslint/eslint-plugin": "^8.50.0",
     "@typescript-eslint/parser": "^8.50.0",
     "@vitest/coverage-v8": "^4.0.0",
     "eslint": "^9.39.2",
+    "installed-check": "^9.3.0",
     "knip": "^5.76.3",
     "prettier": "^3.7.4",
+    "semantic-release": "^25.0.2",
     "typescript": "~5.8.3",
-    "vitest": "^4.0.0",
-    "semantic-release": "^21.0.0"
-  }
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": "^20.0.0 || ^22.0.0 || >=24.0.0"
+  },
+  "packageManager": "pnpm@10.26.0"
 }
