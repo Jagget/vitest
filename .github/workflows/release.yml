@@ -98,7 +98,7 @@ jobs:
 
   # Dev/Nightly release job - manual versioning with custom npm tag
   dev-release:
-    if: inputs.npm_tag != ''
+    if: inputs.release_type == 'dev'
     name: Dev Release
     concurrency:
       group: release-dev-${{ inputs.npm_tag }}
