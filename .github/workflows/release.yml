@@ -75,16 +75,10 @@ jobs:
 
       - name: 🚀 Run semantic-release
         if: ${{ !inputs.dry_run }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm release
 
       - name: 🔍 Dry run semantic-release
         if: ${{ inputs.dry_run }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm release --dry-run
 
   # Dev/Nightly release job - manual versioning with custom npm tag
@@ -151,8 +145,6 @@ jobs:
           npm version ${{ steps.version.outputs.version }} --no-git-tag-version
 
       - name: 🚀 Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --tag ${{ inputs.npm_tag }} --access public --provenance
 
