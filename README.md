@@ -1,4 +1,4 @@
-# @stenciljs/vitest
+# @stencil/vitest
 
 First-class testing utilities for Stencil components, powered by Vitest.
 
@@ -7,7 +7,7 @@ First-class testing utilities for Stencil components, powered by Vitest.
 ### 1. Install
 
 ```bash
-npm i --save-dev @stenciljs/vitest vitest
+npm i --save-dev @stencil/vitest vitest
 ```
 
 For browser testing, also install:
@@ -21,7 +21,7 @@ npm i -D @vitest/browser-webdriverio
 ### 2. Create `vitest.config.ts`
 
 ```typescript
-import { defineVitestConfig } from '@stenciljs/vitest/config';
+import { defineVitestConfig } from '@stencil/vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 
 export default defineVitestConfig({
@@ -95,7 +95,7 @@ export {};
 // src/components/my-button/my-button.spec.tsx
 
 import { describe, it, expect } from 'vitest';
-import { render, h } from '@stenciljs/vitest';
+import { render, h } from '@stencil/vitest';
 
 describe('my-button', () => {
   it('renders with text', async () => {
@@ -139,7 +139,7 @@ describe('my-button', () => {
 Render a component for testing.
 
 ```tsx
-import { render, h } from '@stenciljs/vitest';
+import { render, h } from '@stencil/vitest';
 
 const { root, waitForChanges, setProps, unmount } = await render(<my-component name="World" />);
 
@@ -208,7 +208,7 @@ expect(clickSpy.lastEvent?.detail).toEqual({ buttonId: 'my-button' });
 The package includes a custom snapshot serializer for Stencil components that properly handles shadow DOM:
 
 ```tsx
-import { render, h } from '@stenciljs/vitest';
+import { render, h } from '@stencil/vitest';
 ...
 const { root } = await render(<my-component />);
 expect(root).toMatchSnapshot();
@@ -232,7 +232,7 @@ expect(root).toMatchSnapshot();
 Browser tests can include screenshot comparisons using Vitest's screenshot capabilities:
 
 ```tsx
-import { render, h } from '@stenciljs/vitest';
+import { render, h } from '@stencil/vitest';
 ...
 const { root } = await render(<my-button variant="primary">Primary Button</my-button>);
 await expect(root).toMatchScreenshot();

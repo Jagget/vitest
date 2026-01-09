@@ -1,8 +1,8 @@
 /**
- * Component tests for my-card using @stenciljs/vitest
+ * Component tests for my-card using @stencil/vitest
  */
 import { describe, it, expect } from 'vitest';
-import { render, type RenderResult } from '@stenciljs/vitest';
+import { render, type RenderResult } from '@stencil/vitest';
 import { h } from '@stencil/core';
 
 describe('my-card - spec tests', () => {

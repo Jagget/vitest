@@ -13,7 +13,7 @@
  * // vitest.config.ts
  * export default defineVitestConfig({
  *   test: {
- *     setupFiles: ['@stenciljs/vitest/jsdom-setup'],
+ *     setupFiles: ['@stencil/vitest/jsdom-setup'],
  *   },
  * });
  * ```

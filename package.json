@@ -1,5 +1,5 @@
 {
-  "name": "@stenciljs/vitest",
+  "name": "@stencil/vitest",
   "repository": {
     "type": "git",
     "url": "https://github.com/stenciljs/vitest"

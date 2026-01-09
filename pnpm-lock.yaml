@@ -69,7 +69,7 @@ importers:
 
   packages/vitest-environment-stencil:
     dependencies:
-      '@stenciljs/vitest':
+      '@stencil/vitest':
         specifier: workspace:*
         version: link:../..
 
@@ -79,7 +79,7 @@ importers:
         specifier: ^4.0.0
         version: 4.40.1
     devDependencies:
-      '@stenciljs/vitest':
+      '@stencil/vitest':
         specifier: workspace:*
         version: link:..
       '@vitest/browser':

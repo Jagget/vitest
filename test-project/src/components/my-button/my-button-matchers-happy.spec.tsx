@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, h } from '@stenciljs/vitest';
+import { render, h } from '@stencil/vitest';
 
 // Test file watching
 describe('my-button - custom matchers (happy-dom)', () => {

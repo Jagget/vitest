@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Quick Start Script for @stenciljs/vitest Testing
+# Quick Start Script for @stencil/vitest Testing
 # This script sets up and runs the complete test suite
 
 set -e  # Exit on error
 
-echo "🚀 @stenciljs/vitest - Test Setup"
+echo "🚀 @stencil/vitest - Test Setup"
 echo "===================================="
 echo ""
 

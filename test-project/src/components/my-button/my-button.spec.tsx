@@ -1,9 +1,9 @@
 /**
- * Component tests for my-button using @stenciljs/vitest
+ * Component tests for my-button using @stencil/vitest
  * Testing file watcher
  */
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, type RenderResult } from '@stenciljs/vitest';
+import { render, type RenderResult } from '@stencil/vitest';
 import { h } from '@stencil/core';
 
 describe('my-button - spec tests', () => {

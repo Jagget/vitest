@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "description": "Test fixture for @stenciljs/vitest",
+  "description": "Test fixture for @stencil/vitest",
   "main": "dist/index.cjs.js",
   "collection": "dist/collection/collection-manifest.json",
   "scripts": {
@@ -15,7 +15,7 @@
     "@stencil/core": "^4.0.0"
   },
   "devDependencies": {
-    "@stenciljs/vitest": "workspace:*",
+    "@stencil/vitest": "workspace:*",
     "@vitest/browser": "^4.0.0",
     "@vitest/browser-playwright": "^4.0.16",
     "happy-dom": "^20.0.11",
