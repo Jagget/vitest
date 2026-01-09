@@ -72,8 +72,9 @@ Production releases are automated using [semantic-release](https://semantic-rele
 1. Go to **Actions** → **Release** workflow
 2. Click **Run workflow**
 3. Select `main` branch
-4. Optionally enable **Dry run** to preview changes without publishing
-5. Click **Run workflow**
+4. Select release type: **production**
+5. Optionally enable **Dry run** to preview changes without publishing
+6. Click **Run workflow**
 
 **What happens:**
 - Analyzes commits since last release
@@ -89,13 +90,14 @@ For testing unreleased features, you can publish development versions with custo
 
 **To trigger a dev release:**
 
-1. Go to **Actions** → **Dev Release** workflow
+1. Go to **Actions** → **Release** workflow
 2. Click **Run workflow**
 3. Select the branch to publish from using the **"Use workflow from"** dropdown
-4. Configure inputs:
+4. Select release type: **dev**
+5. Configure inputs:
    - **NPM tag** - Distribution tag (dev, next, alpha, beta, nightly, canary) - also used as version suffix
    - **Custom NPM tag** - Optional custom tag like `v4.1.x` (overrides selection above)
-5. Click **Run workflow**
+6. Click **Run workflow**
 
 **What happens:**
 - Builds from the selected branch

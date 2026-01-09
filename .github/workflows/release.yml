@@ -1,27 +1,30 @@
 name: Release
 
 on:
-  # Manual production release trigger
   workflow_dispatch:
     inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - dev
       dry_run:
-        description: 'Dry run (no actual release)'
+        description: 'Dry run (production releases only)'
         required: false
         default: false
         type: boolean
-
-  # Reusable workflow for dev/nightly releases
-  workflow_call:
-    inputs:
       npm_tag:
-        description: 'NPM dist tag (e.g., dev, next, alpha, beta, or version number)'
-        required: true
-        type: string
-      version_suffix:
-        description: 'Version suffix (e.g., dev, nightly, alpha)'
+        description: 'NPM dist tag (dev releases only, e.g., dev, next, alpha, beta, nightly)'
         required: false
         type: string
         default: 'dev'
+      custom_npm_tag:
+        description: 'Custom NPM tag (dev releases only, overrides above, e.g., v4.1.x)'
+        required: false
+        type: string
 
 # Remove default permissions of GITHUB_TOKEN for security
 # https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
@@ -30,7 +33,7 @@ permissions: {}
 jobs:
   # Production release job - runs semantic-release for automated versioning
   production-release:
-    if: inputs.npm_tag == ''
+    if: inputs.release_type == 'production'
     name: Production Release
     concurrency:
       group: release-production
@@ -123,22 +126,27 @@ jobs:
       - name: 🛠 Build package
         run: pnpm build && pnpm install
 
+      - name: 🧪 Run tests
+        run: pnpm test
+
       - name: 🏷️ Generate dev version
         id: version
         run: |
           COMMIT_SHA=$(git rev-parse --short HEAD)
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
           CURRENT_VERSION=$(node -p "require('./package.json').version")
+          NPM_TAG="${{ inputs.custom_npm_tag || inputs.npm_tag }}"
           
-          # Generate version based on suffix
-          if [ "${{ inputs.version_suffix }}" = "nightly" ]; then
+          # Generate version based on tag
+          if [ "${NPM_TAG}" = "nightly" ]; then
             DEV_VERSION="${CURRENT_VERSION}-nightly.${TIMESTAMP}"
           else
-            DEV_VERSION="${CURRENT_VERSION}-${{ inputs.version_suffix }}.${TIMESTAMP}.${COMMIT_SHA}"
+            DEV_VERSION="${CURRENT_VERSION}-${NPM_TAG}.${TIMESTAMP}.${COMMIT_SHA}"
           fi
           
           echo "version=${DEV_VERSION}" >> $GITHUB_OUTPUT
-          echo "📦 Publishing version: ${DEV_VERSION} with tag: ${{ inputs.npm_tag }}"
+          echo "npm_tag=${NPM_TAG}" >> $GITHUB_OUTPUT
+          echo "📦 Publishing version: ${DEV_VERSION} with tag: ${NPM_TAG}"
 
       - name: 📝 Update package.json version
         run: |
@@ -146,7 +154,7 @@ jobs:
 
       - name: 🚀 Publish to npm
         run: |
-          npm publish --tag ${{ inputs.npm_tag }} --access public --provenance
+          npm publish --tag ${{ steps.version.outputs.npm_tag }} --access public --provenance
 
       - name: 🏷️ Create git tag
         run: |
@@ -160,10 +168,10 @@ jobs:
           echo "## 🎉 Dev Release Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Version:** \`${{ steps.version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **NPM Tag:** \`${{ inputs.npm_tag }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **NPM Tag:** \`${{ steps.version.outputs.npm_tag }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Install with:" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
-          echo "npm install @stencil/vitest@${{ inputs.npm_tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "npm install @stencil/vitest@${{ steps.version.outputs.npm_tag }}" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
