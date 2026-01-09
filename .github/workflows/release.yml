@@ -57,7 +57,6 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
-          persist-credentials: false
 
       - name: 🔧 Setup environment
         run: corepack enable
@@ -85,15 +84,19 @@ jobs:
 
       - name: 🚀 Run semantic-release
         if: ${{ !inputs.dry_run }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm release
 
-      - name: � Publish vitest-environment-stencil
+      - name: 🚀 Publish vitest-environment-stencil
         if: ${{ !inputs.dry_run }}
         working-directory: packages/vitest-environment-stencil
         run: npm publish --access public --provenance
 
-      - name: �🔍 Dry run semantic-release
+      - name:  Dry run semantic-release
         if: ${{ inputs.dry_run }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm release --dry-run
 
   # Dev/Nightly release job - manual versioning with custom npm tag
