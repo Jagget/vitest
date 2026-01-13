@@ -13,13 +13,14 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true
+        "npmPublish": false
       }
     ],
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "cd packages/vitest-environment-stencil && npm version ${nextRelease.version} --no-git-tag-version --allow-same-version || true"
+        "prepareCmd": "cd packages/vitest-environment-stencil && npm version ${nextRelease.version} --no-git-tag-version --allow-same-version || true",
+        "publishCmd": "pnpm publish --no-git-checks && cd packages/vitest-environment-stencil && pnpm publish --no-git-checks"
       }
     ],
     [

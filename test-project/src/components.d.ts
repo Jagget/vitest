@@ -45,6 +45,14 @@ export namespace Components {
          */
         "interactive": boolean;
     }
+    /**
+     * Test component with scoped encapsulation (non-shadow) and slots
+     * Stencil polyfills slot behavior and protects the component by monkey-patching
+     * childNodes, children, firstChild, lastChild to only return lightDOM
+     * Original accessors are moved to __childNodes, __children, etc.
+     */
+    interface NonShadowComponent {
+    }
 }
 export interface MyButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -80,9 +88,22 @@ declare global {
         prototype: HTMLMyCardElement;
         new (): HTMLMyCardElement;
     };
+    /**
+     * Test component with scoped encapsulation (non-shadow) and slots
+     * Stencil polyfills slot behavior and protects the component by monkey-patching
+     * childNodes, children, firstChild, lastChild to only return lightDOM
+     * Original accessors are moved to __childNodes, __children, etc.
+     */
+    interface HTMLNonShadowComponentElement extends Components.NonShadowComponent, HTMLStencilElement {
+    }
+    var HTMLNonShadowComponentElement: {
+        prototype: HTMLNonShadowComponentElement;
+        new (): HTMLNonShadowComponentElement;
+    };
     interface HTMLElementTagNameMap {
         "my-button": HTMLMyButtonElement;
         "my-card": HTMLMyCardElement;
+        "non-shadow-component": HTMLNonShadowComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -129,9 +150,18 @@ declare namespace LocalJSX {
          */
         "interactive"?: boolean;
     }
+    /**
+     * Test component with scoped encapsulation (non-shadow) and slots
+     * Stencil polyfills slot behavior and protects the component by monkey-patching
+     * childNodes, children, firstChild, lastChild to only return lightDOM
+     * Original accessors are moved to __childNodes, __children, etc.
+     */
+    interface NonShadowComponent {
+    }
     interface IntrinsicElements {
         "my-button": MyButton;
         "my-card": MyCard;
+        "non-shadow-component": NonShadowComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -146,6 +176,13 @@ declare module "@stencil/core" {
              * A card component with header, content, and footer slots
              */
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
+            /**
+             * Test component with scoped encapsulation (non-shadow) and slots
+             * Stencil polyfills slot behavior and protects the component by monkey-patching
+             * childNodes, children, firstChild, lastChild to only return lightDOM
+             * Original accessors are moved to __childNodes, __children, etc.
+             */
+            "non-shadow-component": LocalJSX.NonShadowComponent & JSXBase.HTMLAttributes<HTMLNonShadowComponentElement>;
         }
     }
 }
