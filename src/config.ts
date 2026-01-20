@@ -174,6 +174,26 @@ function applyStencilDefaults(config: ViteUserConfig, stencilConfig?: StencilCon
     result.test = {};
   }
 
+  // Inline vitest-environment-stencil so it resolves from this package's node_modules
+  // This is necessary for pnpm which doesn't hoist transitive dependencies
+  if (!result.test.server) {
+    result.test.server = {};
+  }
+  if (!result.test.server.deps) {
+    result.test.server.deps = {};
+  }
+  if (!result.test.server.deps.inline) {
+    result.test.server.deps.inline = [];
+  }
+  if (Array.isArray(result.test.server.deps.inline)) {
+    if (!result.test.server.deps.inline.includes('vitest-environment-stencil')) {
+      result.test.server.deps.inline.push('vitest-environment-stencil');
+    }
+    if (!result.test.server.deps.inline.includes('@stencil/vitest')) {
+      result.test.server.deps.inline.push('@stencil/vitest');
+    }
+  }
+
   // Enable forceRerunTriggers to watch output directories
   // This ensures Vitest re-runs tests when Stencil rebuilds components
   const outputDirs = getStencilOutputDirs(stencilConfig);
