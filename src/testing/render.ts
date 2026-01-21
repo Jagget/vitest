@@ -12,13 +12,13 @@ const eventSpies = new WeakMap<HTMLElement, EventSpy[]>();
 /**
  * Render using Stencil's render
  */
-export async function render<T extends HTMLElement = HTMLElement>(
+export async function render<T extends HTMLElement = HTMLElement, I = any>(
   vnode: any,
   options: RenderOptions = {
     clearStage: true,
     stageAttrs: { class: 'stencil-component-stage' },
   },
-): Promise<RenderResult<T>> {
+): Promise<RenderResult<T, I>> {
   // Use Stencil's render which handles VNodes properly in the browser
   const container = document.createElement('div');
   Object.entries(options.stageAttrs || {}).forEach(([key, value]) => {
@@ -131,10 +131,15 @@ export async function render<T extends HTMLElement = HTMLElement>(
     return spy;
   };
 
+  let instance = element;
+  if ((element as any).__stencil__getHostRef) {
+    instance = (element as any).__stencil__getHostRef()?.$lazyInstance$ || element;
+  }
+
   return {
     root: element,
     waitForChanges,
-    instance: element as any,
+    instance: instance as unknown as I,
     setProps,
     unmount,
     spyOnEvent,
