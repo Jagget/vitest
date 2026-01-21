@@ -24,8 +24,6 @@ concurrency:
 
 jobs:
   lint:
-    # autofix workflow will be triggered instead for PRs
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
