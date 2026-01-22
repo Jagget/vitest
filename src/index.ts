@@ -1,2 +1,2 @@
 export * from 'vitest';
-export * from './core';
+export * from './core.js';
