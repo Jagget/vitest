@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/stenciljs/vitest/compare/v1.1.4...v1.1.5) (2026-01-22)
+
+
+### Bug Fixes
+
+* core module extension ([3a9414e](https://github.com/stenciljs/vitest/commit/3a9414ea5d39fabce13d5233f6b0c92a90ec64d8))
+
 ## [1.1.4](https://github.com/stenciljs/vitest/compare/v1.1.3...v1.1.4) (2026-01-22)
 
 
