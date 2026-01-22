@@ -10,9 +10,7 @@ import type { Config as StencilConfig } from '@stencil/core/internal';
 
 // Resolve the path to the stencil environment module at config load time
 // This is necessary for pnpm which doesn't hoist transitive dependencies
-const stencilEnvironmentPath = fileURLToPath(
-  import.meta.resolve('@stencil/vitest/environments/stencil'),
-);
+const stencilEnvironmentPath = fileURLToPath(import.meta.resolve('@stencil/vitest/environments/stencil'));
 
 /**
  * Define a Vitest configuration for Stencil component testing
