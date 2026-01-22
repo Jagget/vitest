@@ -10,7 +10,7 @@ body:
 
         Please provide a minimal reproduction using our starter template:
         - [CodeSandbox](https://codesandbox.io/p/github/johnjenkins/stencil-starter-vitest)
-        - [Source Repo](https://github.com/johnjenkins/stencil-starter-vitest)
+        - [Starter Repo](https://github.com/johnjenkins/stencil-starter-vitest)
 
         > **Note:** Browser tests will not work in a CodeSandbox container. 
         If your issue relates to browser testing, please provide a GitHub repository instead.
