@@ -1,7 +1,7 @@
 import { importModule } from 'local-pkg';
 import type { EnvironmentStencil } from '../types.js';
 
-export default <EnvironmentStencil>async function (global, options) {
+export default <EnvironmentStencil>async function (_global, options) {
   const { Window, GlobalWindow } = (await importModule('happy-dom')) as any;
 
   const happyDomOptions = {

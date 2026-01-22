@@ -2,16 +2,8 @@
   "$schema": "https://unpkg.com/knip@latest/schema.json",
   "workspaces": {
     ".": {
-      "entry": [
-        "src/core.ts",
-        "src/config.ts",
-        "src/environments/**/*.ts",
-        "src/setup/happy-dom-setup.ts",
-        "src/setup/jsdom-setup.ts",
-        "src/setup/mock-doc-setup.ts",
-        "bin/stencil-test.ts"
-      ],
-      "ignore": ["test-project/**", "dist/**", "**/snapshot-serializer.ts", "**/matchers.ts", "**/html-serializer.ts"],
+      "entry": ["src/environments/**/*.ts", "bin/stencil-test.ts"],
+      "ignore": ["test-project/**", "dist/**"],
       "ignoreDependencies": ["vitest-environment-stencil"]
     }
   }

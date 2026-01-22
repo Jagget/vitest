@@ -59,7 +59,7 @@ declare module 'vitest' {
 /**
  * Check if element has a class
  */
-export function toHaveClass(received: HTMLElement, className: string): { pass: boolean; message: () => string } {
+function toHaveClass(received: HTMLElement, className: string): { pass: boolean; message: () => string } {
   const pass = received.classList.contains(className);
 
   return {
@@ -73,7 +73,7 @@ export function toHaveClass(received: HTMLElement, className: string): { pass: b
  * Check if element has multiple classes
  * Checks if element has all of the specified CSS classes (order doesn't matter)
  */
-export function toHaveClasses(received: HTMLElement, classNames: string[]): { pass: boolean; message: () => string } {
+function toHaveClasses(received: HTMLElement, classNames: string[]): { pass: boolean; message: () => string } {
   const missingClasses: string[] = [];
 
   for (const className of classNames) {
@@ -98,7 +98,7 @@ export function toHaveClasses(received: HTMLElement, classNames: string[]): { pa
  * Check if element has exactly the specified CSS classes (no more, no less)
  * Order doesn't matter, but the element must have exactly these classes
  */
-export function toMatchClasses(received: HTMLElement, classNames: string[]): { pass: boolean; message: () => string } {
+function toMatchClasses(received: HTMLElement, classNames: string[]): { pass: boolean; message: () => string } {
   // Get classes from the class attribute to support mock-doc
   const classAttr = received.getAttribute('class') || '';
   const actualClasses = classAttr.split(/\s+/).filter(Boolean).sort();
@@ -119,7 +119,7 @@ export function toMatchClasses(received: HTMLElement, classNames: string[]): { p
 /**
  * Check if element has an attribute
  */
-export function toHaveAttribute(
+function toHaveAttribute(
   received: HTMLElement,
   attribute: string,
   value?: string,
@@ -155,7 +155,7 @@ export function toHaveAttribute(
 /**
  * Check if element has a specific attribute with an exact value
  */
-export function toEqualAttribute(
+function toEqualAttribute(
   received: HTMLElement,
   attribute: string,
   value: string,
@@ -175,7 +175,7 @@ export function toEqualAttribute(
 /**
  * Check if element has all expected attributes with exact values
  */
-export function toEqualAttributes(
+function toEqualAttributes(
   received: HTMLElement,
   expectedAttrs: Record<string, string>,
 ): { pass: boolean; message: () => string } {
@@ -213,7 +213,7 @@ export function toEqualAttributes(
 /**
  * Check if element has a property
  */
-export function toHaveProperty(received: any, property: string, value?: any): { pass: boolean; message: () => string } {
+function toHaveProperty(received: any, property: string, value?: any): { pass: boolean; message: () => string } {
   const hasProperty = property in received;
 
   if (!hasProperty) {
@@ -245,7 +245,7 @@ export function toHaveProperty(received: any, property: string, value?: any): { 
 /**
  * Check if element has text content
  */
-export function toHaveTextContent(received: HTMLElement, text: string): { pass: boolean; message: () => string } {
+function toHaveTextContent(received: HTMLElement, text: string): { pass: boolean; message: () => string } {
   const actualText = received.textContent || '';
   const pass = actualText.includes(text);
 
@@ -261,7 +261,7 @@ export function toHaveTextContent(received: HTMLElement, text: string): { pass: 
 /**
  * Check if element's text content exactly matches (after trimming)
  */
-export function toEqualText(received: HTMLElement, expectedText: string): { pass: boolean; message: () => string } {
+function toEqualText(received: HTMLElement, expectedText: string): { pass: boolean; message: () => string } {
   const actualText = (received.textContent || '').trim();
   const trimmedExpected = expectedText.trim();
   const pass = actualText === trimmedExpected;
@@ -278,7 +278,7 @@ export function toEqualText(received: HTMLElement, expectedText: string): { pass
 /**
  * Check if element has shadow root
  */
-export function toHaveShadowRoot(received: HTMLElement): { pass: boolean; message: () => string } {
+function toHaveShadowRoot(received: HTMLElement): { pass: boolean; message: () => string } {
   const pass = !!received.shadowRoot;
 
   return {
@@ -311,7 +311,7 @@ function parseHtmlFragment(html: string): DocumentFragment {
  * Custom matcher to check if an element's HTML matches the expected HTML
  * Serializes the entire component tree including shadow DOM
  */
-export function toEqualHtml(
+function toEqualHtml(
   received: string | HTMLElement | ShadowRoot,
   expected: string,
 ): { pass: boolean; message: () => string } {
@@ -359,7 +359,7 @@ export function toEqualHtml(
  * Custom matcher to check if an element's Light DOM matches the expected HTML
  * Does not serialize shadow DOM
  */
-export function toEqualLightHtml(
+function toEqualLightHtml(
   received: string | HTMLElement | ShadowRoot,
   expected: string,
 ): { pass: boolean; message: () => string } {
@@ -407,7 +407,7 @@ export function toEqualLightHtml(
 /**
  * Check if an EventSpy has received at least one event
  */
-export function toHaveReceivedEvent(received: EventSpy): { pass: boolean; message: () => string } {
+function toHaveReceivedEvent(received: EventSpy): { pass: boolean; message: () => string } {
   const pass = received.length > 0;
 
   return {
@@ -422,7 +422,7 @@ export function toHaveReceivedEvent(received: EventSpy): { pass: boolean; messag
 /**
  * Check if an EventSpy has received an event a specific number of times
  */
-export function toHaveReceivedEventTimes(received: EventSpy, count: number): { pass: boolean; message: () => string } {
+function toHaveReceivedEventTimes(received: EventSpy, count: number): { pass: boolean; message: () => string } {
   const pass = received.length === count;
 
   return {
@@ -468,7 +468,7 @@ function safeEquals(a: any, b: any): boolean {
 /**
  * Check if the last received event has the expected detail
  */
-export function toHaveReceivedEventDetail(received: EventSpy, detail: any): { pass: boolean; message: () => string } {
+function toHaveReceivedEventDetail(received: EventSpy, detail: any): { pass: boolean; message: () => string } {
   if (received.length === 0) {
     return {
       pass: false,
@@ -492,10 +492,7 @@ export function toHaveReceivedEventDetail(received: EventSpy, detail: any): { pa
 /**
  * Check if the first received event has the expected detail
  */
-export function toHaveFirstReceivedEventDetail(
-  received: EventSpy,
-  detail: any,
-): { pass: boolean; message: () => string } {
+function toHaveFirstReceivedEventDetail(received: EventSpy, detail: any): { pass: boolean; message: () => string } {
   if (received.length === 0) {
     return {
       pass: false,
@@ -519,17 +516,14 @@ export function toHaveFirstReceivedEventDetail(
 /**
  * Check if the last received event has the expected detail (alias for toHaveReceivedEventDetail)
  */
-export function toHaveLastReceivedEventDetail(
-  received: EventSpy,
-  detail: any,
-): { pass: boolean; message: () => string } {
+function toHaveLastReceivedEventDetail(received: EventSpy, detail: any): { pass: boolean; message: () => string } {
   return toHaveReceivedEventDetail(received, detail);
 }
 
 /**
  * Check if the event at a specific index has the expected detail
  */
-export function toHaveNthReceivedEventDetail(
+function toHaveNthReceivedEventDetail(
   received: EventSpy,
   index: number,
   detail: any,
@@ -564,7 +558,7 @@ export function toHaveNthReceivedEventDetail(
 /**
  * Install custom matchers
  */
-export function installMatchers() {
+function installMatchers() {
   expect.extend({
     toHaveClass,
     toHaveClasses,
@@ -589,3 +583,5 @@ export function installMatchers() {
 
 // Auto-install matchers when this module is imported
 installMatchers();
+
+export {};

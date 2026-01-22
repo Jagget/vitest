@@ -12,7 +12,7 @@ import { serializeHtml } from './html-serializer.js';
 /**
  * Vitest snapshot serializer for Stencil components
  */
-export const StencilSnapshotSerializer: SnapshotSerializer = {
+const StencilSnapshotSerializer: SnapshotSerializer = {
   /**
    * Test if this serializer should handle the value
    */
@@ -47,13 +47,10 @@ export const StencilSnapshotSerializer: SnapshotSerializer = {
   },
 };
 
-/**
- * Default export for convenience
- */
-export default StencilSnapshotSerializer;
-
-export function installMatchers() {
+function installMatchers() {
   expect.addSnapshotSerializer(StencilSnapshotSerializer);
 }
 
 installMatchers();
+
+export {};
