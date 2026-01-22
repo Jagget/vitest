@@ -1,0 +1,39 @@
+name: Feature Request
+description: Suggest an idea for @stencil/vitest
+title: 'feat: '
+body:
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      options:
+        - label: I have searched for [existing issues](https://github.com/stenciljs/vitest/issues) that already include this feature request, without success.
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Describe the Feature
+      description: A clear description of what you want to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Use Case
+      description: What problem would this feature solve?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Proposed Solution
+      description: How do you think this should be implemented?
+
+  - type: textarea
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions you've considered.
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: Any other context, code examples, or screenshots.

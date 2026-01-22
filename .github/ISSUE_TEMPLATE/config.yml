@@ -1,0 +1,10 @@
+contact_links:
+  - name: Support Question
+    url: https://github.com/stenciljs/vitest/discussions
+    about: For support questions, please use GitHub Discussions instead.
+  - name: Stencil Core Issues
+    url: https://github.com/ionic-team/stencil/issues/new/choose
+    about: For issues with Stencil itself, please file on the Stencil repo.
+  - name: Vitest Issues
+    url: https://github.com/vitest-dev/vitest/issues/new/choose
+    about: For issues with Vitest itself, please file on the Vitest repo.

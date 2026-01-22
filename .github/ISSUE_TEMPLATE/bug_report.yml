@@ -1,0 +1,88 @@
+name: Bug Report
+description: Report a bug with @stencil/vitest
+title: 'bug: '
+labels: ['pending triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        Please provide a minimal reproduction using our starter template:
+        - [CodeSandbox](https://codesandbox.io/p/github/johnjenkins/stencil-starter-vitest)
+        - [Source Repo](https://github.com/johnjenkins/stencil-starter-vitest)
+
+        > **Note:** Browser tests will not work in a CodeSandbox container. 
+        If your issue relates to browser testing, please provide a GitHub repository instead.
+
+        A minimal reproduction is **required**. Issues without reproductions may be closed.
+
+  - type: checkboxes
+    attributes:
+      label: Prerequisites
+      options:
+        - label: I have searched for [existing issues](https://github.com/stenciljs/vitest/issues) that already report this problem, without success.
+          required: true
+
+  - type: input
+    attributes:
+      label: Package Version
+      description: The version of @stencil/vitest you are using.
+      placeholder: e.g., 1.1.0
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Stencil Version
+      description: The version of @stencil/core you are using.
+      placeholder: e.g., 4.0.0
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Vitest Version
+      description: The version of vitest you are using.
+      placeholder: e.g., 2.0.0
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Reproduction URL
+      description: |
+        Link to a minimal reproduction. Use our [starter template](https://codesandbox.io/p/github/johnjenkins/stencil-starter-vitest).
+        For browser testing issues, provide a GitHub repository.
+      placeholder: https://codesandbox.io/p/...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Run '...'
+        2. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Logs
+      description: Paste any relevant error logs here.
+      render: shell-session
