@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/stenciljs/vitest/compare/v1.1.6...v1.1.7) (2026-02-06)
+
+
+### Bug Fixes
+
+* **bin:** update import statement for base config in temporary stencil config ([#7](https://github.com/stenciljs/vitest/issues/7)) ([2f4d7b0](https://github.com/stenciljs/vitest/commit/2f4d7b0b87f4cfd29e488820fbaa0d4cca47b1e0))
+
 ## [1.1.6](https://github.com/stenciljs/vitest/compare/v1.1.5...v1.1.6) (2026-02-06)
 
 
