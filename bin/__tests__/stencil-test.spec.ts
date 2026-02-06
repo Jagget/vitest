@@ -329,6 +329,9 @@ export default {
       // Run and then kill
       await runCLIInDir(testDir, ['--watch', '--verbose'], 2000);
 
+      // Wait for filesystem to sync (Windows can be slow)
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       // Check that temp config was cleaned up
       const tempConfigs = require('fs')
         .readdirSync(testDir)
