@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/stenciljs/vitest/compare/v1.1.8...v1.1.9) (2026-02-10)
+
+
+### Bug Fixes
+
+* **render:** allow to spy on more than 1 event ([#10](https://github.com/stenciljs/vitest/issues/10)) ([217e46c](https://github.com/stenciljs/vitest/commit/217e46cff9cf3d01c666ccc693ce8114211fe945))
+
 ## [1.1.8](https://github.com/stenciljs/vitest/compare/v1.1.7...v1.1.8) (2026-02-09)
 
 
