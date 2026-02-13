@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/stenciljs/vitest/compare/v1.1.9...v1.1.10) (2026-02-13)
+
+
+### Bug Fixes
+
+* bump accepted core versions ([48a99e1](https://github.com/stenciljs/vitest/commit/48a99e14f7728a747c593730a4f3681b143e8fb3))
+
 ## [1.1.9](https://github.com/stenciljs/vitest/compare/v1.1.8...v1.1.9) (2026-02-10)
 
 
