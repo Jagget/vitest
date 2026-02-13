@@ -51,8 +51,10 @@
   ],
   "keywords": [
     "stencil",
+    "stenciljs",
     "testing",
     "vitest",
+    "custom elements",
     "web components",
     "component testing"
   ],
@@ -77,7 +79,7 @@
   },
   "peerDependencies": {
     "@stencil/core": "^4.0.0",
-    "vitest": "^4.0.0 || ^3.0.0 || ^2.0.0"
+    "vitest": "^4.0.0 || ^3.0.0 || ^2.0.0 || ^5.0.0-next"
   },
   "peerDependenciesMeta": {
     "@playwright/test": {
