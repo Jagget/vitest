@@ -1,3 +1,10 @@
+## [1.1.20](https://github.com/stenciljs/vitest/compare/v1.1.19...v1.1.20) (2026-02-16)
+
+
+### Bug Fixes
+
+* stop `toEqualHtml` string comparison from stripping outer tags ([#20](https://github.com/stenciljs/vitest/issues/20)) ([d163696](https://github.com/stenciljs/vitest/commit/d1636966ffde0773832590817d3fe71bdb5277e8))
+
 ## [1.1.19](https://github.com/stenciljs/vitest/compare/v1.1.18...v1.1.19) (2026-02-16)
 
 
